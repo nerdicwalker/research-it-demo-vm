@@ -412,6 +412,18 @@ def main():
         print(ex)
         # exit()
 
+    print(
+        f"Removing Azure Virtual Machine {virtual_machine_name} system identity from Azure Key Vault {jumpcloud_agent_key_vault_name}.")
+    azm_key_vault.append_access_policy_to_key_vault(
+        azure_tenant_id,
+        azure_client_id,
+        azure_secret_id,
+        subscription_id,
+        automation_resources_resource_group,
+        jumpcloud_agent_key_vault_name,
+        virtual_machine_system_id
+    )
+
     print(f"Azure Virtual Machine {virtual_machine_name} ready.")
 
 

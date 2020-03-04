@@ -84,6 +84,44 @@ def append_access_policy_to_key_vault(
         print(ex)
 
 
+def remove_access_policy_to_key_vault(
+    azure_tenant_id,
+    azure_client_id,
+    azure_secret_id,
+    subscription_id,
+    resource_group_name,
+    key_vault_name,
+    azure_ad_user_object_id,
+):
+    "Remove access policy to key vault"
+    credentials = azm_credentials.get_azure_credentials(
+        azure_tenant_id, azure_client_id, azure_secret_id
+    )
+    key_vault_resource = KeyVaultManagementClient(credentials, subscription_id)
+
+    operation_kind = "remove"
+    properties = {
+        'tenant_id': azure_tenant_id,
+        'access_policies': [{
+            'object_id': azure_ad_user_object_id,
+            'tenant_id': azure_tenant_id,
+        }]
+    }
+
+    try:
+        append_access_policy = key_vault_resource.vaults.update_access_policy(
+            resource_group_name,
+            key_vault_name,
+            operation_kind,
+            properties,
+            custom_headers=None,
+            raw=False,
+            polling=True,
+        )
+    except CloudError as ex:
+        print(ex)
+
+
 def get_key_vault(
     azure_tenant_id,
     azure_client_id,
