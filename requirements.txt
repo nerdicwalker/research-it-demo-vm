@@ -1,0 +1,5 @@
+cffi==1.13.2
+azure==4.0.0
+pylint==2.4.4
+pylint-junit==0.2.0
+azure-storage-blob==12.1.0
