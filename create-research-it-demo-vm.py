@@ -336,6 +336,7 @@ def main():
         script
     )
 
+    # install JumpCloud agent software into virtual machine
     print(
         f"Fetching Azure Virtual Machine {virtual_machine_name} system identity.")
     virtual_machine_system_info = azm_virtual_machine.get_virtual_machine_info(
